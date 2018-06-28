@@ -1,0 +1,67 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>当盒模型的四条边框颜色不同时的效果</title>
+</head>
+<body>
+    <p>当盒模型的四条边框颜色不同时的效果如下：</p>
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <div class="box3"></div>
+    <div class="box4"></div>
+    <div class="box5"></div>
+    <p>用途：1.可以制作下拉菜单; 2.什么形状的三角形都能做</p>
+    <style>
+        .box1{
+            border-width: 50px;
+            border-style: solid;
+            border-color: #f35 #269 #649 #fa0;
+
+            width: 200px;
+            height: 200px;
+            transition: all 2s ease-in;
+            margin: 1em auto;
+        }
+        .box2{
+            border-width: 50px;
+            border-style: solid;
+            border-color: #f35 #269 #649 #fa0;
+
+            width: 0px;
+            height: 0px;
+            transition: all 2s ease-in;
+            margin: 1em auto;
+        }
+        .box3{
+            border-width: 50px;
+            border-style: solid;
+            border-color: #f35 transparent transparent;
+
+            width: 0px;
+            height: 0px;
+            transition: all 2s ease-in;
+            margin: 1em auto;
+        }
+        .box4{
+            border-width: 50px;
+            border-style: solid;
+            border-color: transparent transparent #649 #649;
+
+            width: 0px;
+            height: 0px;
+            transition: all 2s ease-in;
+            margin: 1em auto;
+        }
+        .box5{
+            border-width: 50px 10px 20px 30px;
+            border-style: solid;
+            border-color: #f35 #269 #649 #fa0;
+
+            width: 0px;
+            height: 0px;
+            transition: all 2s ease-in;
+            margin: 1em auto;
+        }
+    </style>
+</body>
+</html>
