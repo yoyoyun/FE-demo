@@ -1,0 +1,47 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>绝对定位</title>
+</head>
+<body>
+    <figure>
+        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530858624&di=8d3547cca6ef18928e5b144d330584b3&imgtype=jpg&er=1&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201412%2F09%2F20141209003802_fdTxW.jpeg" width="512" alt="daisy">
+        <figcaption>图片标题</figcaption>
+    </figure>
+    <p>其他文本内容</p>
+    <style>
+        figure {
+            width: 512px;
+            position: relative;  /*表示可以相对于figure定位,不是static*/
+        }
+        figure img {
+            display: block;
+        }
+        figcaption {
+            position: absolute; /*绝对定位*/
+            bottom: 0;  /*相对于最近的非static祖先的padding box定位*/
+            width: 100%;  /*由于相对于父级content box宽度,自身还设置了padding,所以背景会超出图片2em*/
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            font-size: 14px;
+            line-height: 2;
+            padding: 0 1em;
+            box-sizing: border-box;  /*加上border-box可解决width处的问题*/
+        }
+        /*法二*/
+        /*figcaption {*/
+            /*position: absolute; */
+            /*bottom: 0;  */
+            /*background: rgba(0,0,0,0.3);*/
+            /*color: #fff;*/
+            /*font-size: 14px;*/
+            /*line-height: 2;*/
+            /*padding: 0 1em;*/
+            /*box-sizing: initial;*/
+            /*left: 0;*/
+            /*right: 0;*/
+        /*}*/
+
+    </style>
+</body>
+</html>

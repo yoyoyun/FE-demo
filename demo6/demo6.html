@@ -1,0 +1,36 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>绝对定位</title>
+</head>
+<body>
+    <div class="box-a">Box a</div>
+    <div class="box-b">Box b</div>
+    <div class="box-c">Box c</div>
+    
+    <style>
+        [class^="box-"] {
+            position: absolute;
+            width: 200px;
+            line-height:200px;  /*只有一行文字的场景,只设置line-height,不设置height*/
+            text-align: center;
+            color: #fff;
+        }
+        .box-a {
+            background: #d4f4cc;
+        }
+        .box-b {
+            top:100px;
+            left:100px;
+            z-index:-1;
+            background: #ec88f4;
+        }
+        .box-c {
+            top:150px;
+            left:150px;
+            z-index:1;
+            background: #89f489;
+        }
+    </style>
+</body>
+</html>
