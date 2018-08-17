@@ -1,0 +1,304 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>轮播图</title>
+  <link type="text/css" rel="stylesheet" href="css/layout.css" />
+</head>
+<body>
+  <header>
+    <h1>实现轮播图</h1>
+  </header>
+  <main>
+    <article>
+      <section>
+        <h2>需求</h2>
+        <pre>
+          1.5张图自动轮换，轮换间隔为5s
+          2.鼠标点击切换为下一张，左右箭头分别切换至上/下一张，点击页码切换到对应图片
+          3.鼠标向左拖拽出图片的一半，则切换为下一张；向右拖拽出图片的一半，则切换为前一张
+          4.HTML+CSS+JAVASCRIPT, 可用jQuery实现
+        </pre>
+      </section>
+      <section>
+        <h2>解决方案</h2>
+        <h3>Step 1: 实现鼠标点击tag切换图片</h3>
+        <pre>
+          HTML: 用无序列表将5张图片组织起来，需要5个小tag标识，需要左右箭头(大于小于)
+          CSS:  ul须整体显示在视窗的中央，默认显示第一张图片，5个tag位于图片上方用相对定位实现，左右箭头用相对定位实现
+                - 1. 给组件的最父级设置position为relative，一是控制整个组件居中，二是方便页码和左右箭头绝对定位（小tip：须去除ul的li前面的圆点和左边的padding以及margin）
+                - 2. 5张图片均设置为float为left，方便设置轮播，即设置left的值即可
+                - 3. 设置页码和箭头的默认样式，及active样式
+                - 4. 效果图<div class="nojs_img"><img src="./img/img06.png"/></div>
+          JS:   监听点击事件，获取点击页码，切换至相应图片
+                - 1. 页码翻页：页码上面监听click事件，处理函数为获取被点击的索引，设置对应索引状态为active，ul的left设置到对应的图片处
+                - 2. 箭头翻页：需要一个计时器，控制索引不能小于0不能大于4，并且要使页码跟图片对应
+        </pre>
+        <h3>Step 2: 实现定时自动轮播图片</h3>
+        <pre>
+          JS:   设置timer计时器，setinterval
+                - 1. 首先得开一个定时器，假设定时器的时间设置为2000ms，也就是2S定时器执行一次操作
+                - 2. 定时器每隔2S执行的操作就是模拟按次序点击数字按钮，也就是触发click事件，让图片左移，并更新页码状态
+        </pre>
+        <h3>Step 3: 实现鼠标悬浮停止轮播图片</h3>
+        <pre>
+          JS:   - 1. 当鼠标悬浮在框架上方时，清除定时器即用clearInterval(timer)关闭定时器，使自动轮播停止
+                - 2. 当鼠标离开框架上方时，重新启动定时器
+                - 3. 鼠标的悬浮和离开借助于hover函数
+                hover(over,out)一个模仿悬停事件（鼠标移动到一个对象上面及移出这个对象）的方法。这是一个自定义的方法，它为频繁使用的任务提供了一种“保持在其中”的状态。
+                over (Function) : 鼠标移到元素上要触发的函数。
+                out (Function): 鼠标移出元素要触发的函数。
+        </pre>
+      </section>
+      <section>
+        <div class="slideshow">
+          <!-- 图片布局开始 -->
+          <ul class="ul_img">
+            <li class="li_img">
+              <a href="#"><img src="./img/img01.png"/></a>
+            </li>
+            <li class="li_img">
+              <a href="#"><img src="./img/img02.png"/></a>
+            </li>
+            <li class="li_img">
+              <a href="#"><img src="./img/img03.png"/></a>
+            </li>
+            <li class="li_img">
+              <a href="#"><img src="./img/img04.png"/></a>
+            </li>
+            <li class="li_img">
+              <a href="#"><img src="./img/img05.png"/></a>
+            </li>
+          </ul>
+          <!-- 图片布局结束 -->
+          <!-- 箭头布局开始 -->
+          <div class="arrows">
+            <span class="leftarrow"><</span>
+            <span class="rightarrow">></span>
+          </div>
+          <!-- 箭头布局结束 -->
+          <!-- 页码布局开始 -->
+          <div class="tags">
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <!-- 页码布局结束 -->
+        </div>
+      </section>
+      <section>
+        <h2>代码实现</h2>
+        <code>
+          <pre>
+            &lt;!-- HTML -->
+            &lt;div class="slideshow">
+              &lt;!-- 图片布局开始 -->
+              &lt;ul class="ul_img">
+                &lt;li class="li_img">
+                  &lt;a href="#">&lt;img src="./img/img01.png"/></a>
+                &lt;/li>
+                &lt;li class="li_img">
+                  &lt;a href="#">&lt;img src="./img/img02.png"/></a>
+                &lt;/li>
+                &lt;li class="li_img">
+                  &lt;a href="#">&lt;img src="./img/img03.png"/></a>
+                &lt;/li>
+                &lt;li class="li_img">
+                  &lt;a href="#">&lt;img src="./img/img04.png"/></a>
+                &lt;/li>
+                &lt;li class="li_img">
+                  &lt;a href="#">&lt;img src="./img/img05.png"/></a>
+                &lt;/li>
+              &lt;/ul>
+              &lt;!-- 图片布局结束 -->
+              &lt;!-- 箭头布局开始 -->
+              &lt;div class="arrows">
+                &lt;span class="leftarrow"><</span>
+                &lt;span class="rightarrow">></span>
+              &lt;/div>
+              &lt;!-- 图片布局结束 -->
+              &lt;!-- 页码布局开始 -->
+              &lt;div class="tags">
+                &lt;span class="active"></span>
+                &lt;span></span>
+                &lt;span></span>
+                &lt;span></span>
+                &lt;span></span>
+              &lt;/div>
+              &lt;!-- 图片布局结束 -->
+            &lt;/div>
+          </pre>
+        </code>
+        <pre>
+          <code>
+            /*CSS*/
+            * {
+              box-sizing: border-box;
+              padding: 0;
+              margin: 0;
+            }
+            html {
+              box-sizing: inherit;
+            }
+            .slideshow {
+              width: 800px;
+              height: 500px; /*其实就是图片的可显示区域*/
+              position: relative; /*便于页码和箭头进行绝对定位*/
+              margin: auto; /*水平居中*/
+              overflow: hidden; /*此处需要将溢出框架的图片部分隐藏*/
+              z-index: 1; /*为了箭头*/
+              border: 1px solid #9E9E9E;
+            }
+            .ul_img {
+              position: relative; /*此处需注意relative，如果没有这个属性，图片将不可左右移动*/
+              width: 5000px; /*子元素设置了浮动，会浮动在ul的左边缘，为了在一行中容纳下所有的图片，设置宽度要大于所有图片之和*/
+            }
+            .li_img {
+              list-style-type: none; /*去除小圆点*/
+              width: 800px; /*设置图片容器的宽高，再设置width为100%，自动缩放*/
+              height: 500px;
+              float: left; /*漂浮在容器的左边*/
+            }
+            img {
+              width: 100%;
+              height: 100%;
+            }
+            .arrows {
+              z-index: 2;
+            }
+            .arrows span {
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%); /*设置垂直居中*/
+              display: block; /*设置宽高*/
+              width: 30px;
+              height: 50px;
+              font-size: 35px;
+              font-weight: bold;
+              color: white;
+              background-color: #171616;
+              line-height: 45px; /*为了垂直居中*/
+              text-align: center;
+              opacity: 0.3;
+              cursor: pointer; /*鼠标悬浮时显示小手*/
+            }
+            .arrows span:hover { /*鼠标悬停改变透明度*/
+              opacity: 0.5;
+            }
+            .leftarrow {
+              left: 0;  /*在左边缘*/
+            }
+            .rightarrow {
+              right: 0;  /*在右边缘*/
+            }
+            .tags {
+              position: absolute;
+              bottom: 5px;
+              left: 50%;  /*水平居中*/
+              transform: translateX(-50%);
+            }
+            .tags span {
+              display: block;
+              width: 12px;
+              height: 12px;
+              border-radius: 50%;  /*制作下排小圆点*/
+              float: left; /*不设置为float就竖着排列了*/
+              margin-left: 10px;
+              background-color: black;
+              border: 2px solid #e6e0e0;
+              cursor: pointer;
+            }
+            .tags span.active {
+              background-color: #ff9800;
+            }
+          </code>
+        </pre>
+        <pre>
+          <code>
+            //JAVASCRIPT，引入jQuery
+            $(document).ready(function(){
+              var i = 0;//i为正在展示的图片索引值，当用户打开网页时首先显示第一张图，即索引值为0
+              var timer=null; //定时器返回值，主要用于关闭定时器
+              var slideShow = $(".slideshow"), //获取最外层框架的名称
+                  ul = slideShow.find("ul"),
+                  arrows = slideShow.find(".arrows span"), //获取箭头
+                  leftarrow = arrows.eq(0), //获取左箭头
+                  rightarrow = arrows.eq(1), //获取右箭头
+                  tags = slideShow.find(".tags span"),//获取页码
+                  oneWidth = slideShow.find("ul li").eq(0).width(); //获取每个图片的宽度
+
+              // 手动点击箭头进行图片切换代码开始
+              leftarrow.on("click", function(){
+                i--; //让图片的索引值次序减1，这样就可以实现顺序轮播图片
+                if(i < 0){//当到达第一张图的时候，让i赋值为最后一张图的索引值，轮播效果跳转到最后一张图重新开始
+                  i = tags.length - 1;
+                }
+                ul.animate({
+                  "left":-oneWidth*i, //注意此处用到left属性，所以ul的样式里面需要设置position: relative; 让ul左移N个图片大小的宽度，N根据被点击的按钮索引值index确定
+                })
+                tags.eq(i).addClass("active").siblings().removeClass("active");
+              });
+              rightarrow.on("click", function(){
+                i++; //让图片的索引值次序加1，这样就可以实现顺序轮播图片
+                if(i > tags.length - 1){//当到达最后一张图的时候，让i赋值为第一张图的索引值，轮播效果跳转到第一张图重新开始
+                  i = 0;
+                }
+                ul.animate({
+                  "left":-oneWidth*i, //注意此处用到left属性，所以ul的样式里面需要设置position: relative; 让ul左移N个图片大小的宽度，N根据被点击的按钮索引值index确定
+                })
+                tags.eq(i).addClass("active").siblings().removeClass("active");
+              });
+              // 手动点击箭头进行图片切换代码结束
+
+              // 手动点击页码进行图片轮播代码开始
+              tags.on("click",function(){ //为每个页码绑定一个点击事件
+                //获得对应的页码，ul设置left对应的距离
+                $(this).addClass("active").siblings().removeClass("active"); //按钮被点击时为这个按钮添加高亮状态，并且将其他按钮高亮状态去掉
+                var index=$(this).index(); //获取哪个按钮被点击，也就是找到被点击按钮的索引值
+                i = index;
+                ul.animate({
+                  "left":-oneWidth*i, //注意此处用到left属性，所以ul的样式里面需要设置position: relative; 让ul左移N个图片大小的宽度，N根据被点击的按钮索引值index确定
+                })
+              });
+              // 手动点击页码进行图片轮播代码结束
+
+              // 定时自动轮播图片代码开始
+              function autoSlide(){
+                timer = setInterval(function(){
+                  i++;
+                  if(i > tags.length-1){
+                    i = 0;
+                  }
+                  tags.eq(i).addClass("active").siblings().removeClass("active");
+                  tags.eq(i).trigger("click"); //模拟触发数字按钮的click
+                },2000); //2000为轮播的时间
+              }
+              autoSlide();
+              // 定时自动轮播图片代码结束
+
+              // 鼠标悬浮图片停止轮播代码开始
+              slideShow.hover(function(){
+                clearInterval(timer)
+              }, autoSlide);
+              // 鼠标悬浮图片停止轮播代码结束
+            })
+          </code>
+        </pre>
+      </section>
+      <footer>
+        <a href="https://yq.aliyun.com/ziliao/152282?spm=a2c4e.11155472.blogcont.28.3f1eeefcoHJGAp">参考链接一</a>
+        <a href="https://yq.aliyun.com/ziliao/152281?spm=a2c4e.11155472.blogcont.26.6a11149eJRpUWR">参考链接二</a>
+        <a href="https://yq.aliyun.com/ziliao/152280?spm=a2c4e.11155472.blogcont.25.4d31eefcHrp3uF">参考链接三</a>
+      </footer>
+    </article>
+  </main>
+  <footer>
+    Copyright@yoyoyun.
+  </footer>
+
+  <script src="./js/jquery-1.7.1.min.js"></script>
+  <script src="js/layout.js"></script>
+</body>
+</html>

@@ -24,3 +24,31 @@
 ### demo6
 - [demo6效果展示](http://118.89.226.43/FE-demo/demo6/demo6.html)
 - 实现效果：z-index堆叠
+
+### demo7
+- [demo7效果展示](http://118.89.226.43/FE-demo/demo7/demo7.html)
+- 实现效果：淘宝双飞翼布局
+
+### demo8
+- [demo8效果展示](http://118.89.226.43/FE-demo/demo8/demo8.html)
+- 实现效果：圣杯布局
+
+### demo9
+- [demo9效果展示](http://118.89.226.43/FE-demo/demo9/demo9.html)
+- 实现效果：flex布局
+
+### demo10
+- [demo10效果展示](http://118.89.226.43/FE-demo/demo10/demo10.html)
+- 实现效果：table布局
+
+### demo13
+- [demo13效果展示](http://118.89.226.43/FE-demo/demo13/demo13.html)
+- 实现效果：轮播图
+
+### demo14
+- [demo14效果展示](http://118.89.226.43/FE-demo/demo14/demo14.html)
+- 实现效果：footer位置的自动适配
+
+### demo15
+- [demo15效果展示](http://118.89.226.43/FE-demo/demo15/demo15.html)
+- 实现效果：实现圆周运动

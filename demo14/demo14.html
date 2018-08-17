@@ -1,0 +1,198 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>footer位置的自动适配</title>
+  <style>
+      * {
+        box-sizing: inherit;
+      }
+      html body {
+        height: 100%;
+        box-sizing: border-box;
+      }
+      main {
+        padding-bottom: 25px;
+        min-height: 100%;
+      }
+      h1 {
+        text-align: center;
+        background: #6AD8D9;
+      }
+      article:nth-child(2) {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+      }
+      pre:nth-of-type(2n+1) {
+        height: 120px;
+      }
+      pre:nth-of-type(2n) {
+        height: 270px;
+      }
+      article:nth-child(2) section {
+        width: 25%;
+      }
+      article:nth-child(2) section:not(:first-child) {
+        margin-left: 3px;
+      }
+      article:nth-child(2) section:nth-child(odd) {
+        /* 奇数 */
+        background: #ACD2EC;
+      }
+      article:nth-child(2) section:nth-child(even) {
+        background: #A6A8E0;
+      }
+      footer {
+          height: 25px;
+          margin-top: -25px;  /*重点*/
+          background: silver;
+          width: 100%;
+          text-align: center;
+          opacity: 0.5;
+          color: #5E5E5E;
+      }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>footer位置的自动适配</h1>
+  </header>
+  <main>
+    <article>
+      <header>
+        <h2>需求</h2>
+      </header>
+      <section>
+        <p>
+          在主要内容不足以铺满整个屏幕的情况下，footer居于屏幕低部显示，
+          使得整个页面占满屏幕。而当主要内容高度大于整个屏幕高度的时候，
+          footer跟随主要内容进行显示。
+        </p>
+      </section>
+    </article>
+    <article>
+      <section>
+        <h3>方案一：基于footer的maigin-top取负值</h3>
+        <pre class="html">
+          &lt;!-- HTML -->
+          &lt;div class="container">
+              主要页面
+          &lt;/div>
+          &lt;footer>底部&lt;/footer>
+        </pre>
+        <pre class="css">
+          /*CSS*/
+          html,body{
+              height: 100%;
+              margin: 0;
+              padding: 0;
+          }
+          .container{
+              box-sizing: border-box;
+              min-height: 100%;
+              padding-bottom: 25px;
+          }
+          footer{
+              height: 25px;
+              margin-top: -25px;
+          }
+        </pre>
+        <h4>Point: 无须形成父子结构，container的padding-bottom、footer的height、margin-top三个值要相对应。</h4>
+      </section>
+      <section>
+        <h3>方案二：footer相对定位</h3>
+        <pre class="html">
+          &lt;!-- HTML -->
+          &lt;div class="container">
+              主要页面
+          &lt;/div>
+          &lt;footer>底部&lt;/footer>
+        </pre>
+        <pre class="css">
+          /*CSS*/
+          html,body{
+              height: 100%;
+              margin: 0;
+              padding: 0;
+          }
+          .container{
+              box-sizing: border-box;
+              min-height: 100%;
+              padding-bottom: 25px;
+          }
+          footer{
+              height: 25px;
+              position: relative;
+              top: -25px;
+          }
+        </pre>
+        <h4>Point: 无须形成父子结构，relative原本的位置不会显示出来。</h4>
+      </section>
+      <section>
+        <h3>方案三：footer绝对定位</h3>
+        <pre class="html">
+          &lt;!-- HTML -->
+          &lt;div class="container">
+              主要页面
+              &lt;footer>底部&lt;/footer>
+          &lt;/div>
+        </pre>
+        <pre class="css">
+          /*CSS*/
+          html,body{
+              height: 100%;
+              margin: 0;
+              padding: 0;
+          }
+          .container{
+              box-sizing: border-box;
+              min-height: 100%;
+              padding-bottom: 25px;
+              position: relative;
+          }
+          footer{
+              height: 25px;
+              position: absolute;
+              bottom: 0;
+          }
+        </pre>
+        <h4>Point: 须形成父子结构，container的padding-bottom、footer的height两个值要相对应。</h4>
+      </section>
+      <section>
+        <h3>方案四：flex布局</h3>
+        <pre class="html">
+          &lt;!-- HTML -->
+          &lt;div class="container">
+              &lt;main>主要页面&lt;/main>
+              &lt;footer>底部&lt;/footer>
+          &lt;/div>
+
+        </pre>
+        <pre class="css">
+          /*CSS*/
+          html,body{
+              height: 100%;
+              margin: 0;
+              padding: 0;
+          }
+          .container{
+              display: flex;
+              height: 100%;
+              flex-direction: column;
+          }
+          main {
+              flex: 1 0 auto;
+          }
+          footer{
+              flex: 0 0 auto;
+          }
+        </pre>
+        <h4>Point: 须父子结构和兄弟结构，flex含三个属性：flex-grow(0不1扩) flex-shrink(0不1缩) flex:basis(auto为原大小)</h4>
+      </section>
+    </article>
+  </main>
+  <footer>
+    Copyright@yoyoyun.
+  </footer>
+</body>
+</html>

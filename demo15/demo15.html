@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>圆周运动</title>
+  <style>
+    html {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      min-height: 100%;
+      position: relative;
+      margin-bottom: 30px;
+    }
+    header {
+      text-align: center;
+    }
+    .illustrate {
+      float: right;
+      width: 600px;
+    }
+    .rectangle {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      border: 1px solid black;
+      padding: 0;
+      margin: auto;
+    }
+    .ball {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      position: absolute;
+      background-color: blue;
+      left: 50%; /*起始位置*/
+      top: 0;
+    }
+
+    /* solution2的样式开始 */
+    @keyframes run { /*定义动画帧*/
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    #ball2 {
+      transform-origin: 0 100px; /*相对于起始位置定义的圆心位置*/
+      animation: run 5s linear infinite; /*run为过渡动画，完成一次用时5s，匀速，无限循环*/
+    }
+    /* solution2的样式结束 */
+
+    main + footer {
+      height: 30px;
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: silver;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>实现圆周运动</h1>
+  </header>
+  <main>
+    <article>
+      <section>
+        <h2>需求</h2>
+        <pre>
+          1.某元素做半径为50px的圆周运动
+        </pre>
+      </section>
+      <h2>解决方案</h2>
+      <section class="solution1">
+        <h3>Solution 1: js实现</h3>
+        <pre>
+          HTML: 父元素和子元素，子元素做圆周运动
+          CSS:  父元素设置position为relative，作为子元素的定位依据；子元素设置absolute
+          JS:   设置计时器，随着时间变化，角度变化，转换为横纵变化，设置子元素对应的top和left值
+        </pre>
+        <div id="solution1">
+          <div id="rectangle1" class="rectangle">
+            <div id="ball1" class="ball"></div>
+          </div>
+        </div>
+        <img class="illustrate" src="./img01.png"/>
+        <pre>
+          &lt;!-- HTML -->
+          &lt;div class="rectangle">
+            &lt;div class="ball"></div>
+          &lt;/div>
+        </pre>
+        <pre>
+          /*CSS*/
+          .rectangle {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            border: 1px solid black;
+            padding: 0;
+            margin: auto;
+          }
+          .ball {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            position: absolute;
+            background-color: blue;
+            left: 50%; /*起始位置*/
+            top: 0;
+          }
+        </pre>
+        <pre>
+          //js
+          var rectangle = document.getElementById("rectangle1");
+          var ball = document.getElementById('ball1');
+
+          var centerX1 = (rectangle1.clientWidth - ball1.clientWidth)/2
+          var centerY1 = centerX1;
+          var radius1 = centerX1; //半径有要求是50px,修改此处即可
+
+          var angle1 = 0;
+          var timer = setInterval(function(){
+            angle1++; //可控制反方向移动
+            x = radius1 * Math.cos( angle1 * Math.PI / 180 );
+            y = radius1 * Math.sin( angle1 * Math.PI / 180 );
+
+            ball1.style.left = centerX1 + x + "px";
+            ball1.style.top = centerY1 + y + "px";
+          },30);
+        </pre>
+      </section>
+      <section>
+        <h3>Solution 2: 仅CSS实现</h3>
+        <pre>
+          HTML: 父元素和子元素，子元素做圆周运动
+          CSS:  借助transform和animation
+        </pre>
+        <div id="solution2">
+          <div id="rectangle2" class="rectangle">
+            <div id="ball2" class="ball"></div>
+          </div>
+        </div>
+        <pre>
+          &lt;!-- HTML -->
+          &lt;div class="rectangle">
+            &lt;div class="ball"></div>
+          &lt;/div>
+        </pre>
+        <pre>
+          /*CSS*/
+          @keyframes run { /*定义动画帧*/
+            from {
+              transform: rotate(0deg);
+            }
+            to {
+              transform: rotate(360deg);
+            }
+          }
+          .rectangle {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            border: 1px solid black;
+            padding: 0;
+            margin: auto;
+          }
+          .ball {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            position: absolute;
+            background-color: blue;
+            left: 50%; /*起始位置*/
+            top: 0;
+            transform-origin: 0 100px; /*相对于起始位置定义的圆心位置*/
+            animation: run 5s linear infinite; /*run为过渡动画，完成一次用时5s，匀速，无限循环*/
+          }
+        </pre>
+      </section>
+      <footer>
+        <a href="https://www.cnblogs.com/tianma3798/p/6288861.html">参考链接一</a>
+      </footer>
+    </article>
+  </main>
+  <footer>
+    Copyright@yoyoyun.
+  </footer>
+  <script>
+    // solution1的js实现开始
+    var rectangle1 = document.getElementById("rectangle1");
+    var ball1 = document.getElementById('ball1');
+
+    var centerX1 = (rectangle1.clientWidth - ball1.clientWidth)/2
+    var centerY1 = centerX1;
+    var radius1 = centerX1;
+
+    var angle1 = 0;
+    var timer = setInterval(function(){
+      angle1++; //可控制反方向移动
+      x = radius1 * Math.cos( angle1 * Math.PI / 180 );
+      y = radius1 * Math.sin( angle1 * Math.PI / 180 );
+
+      ball1.style.left = centerX1 + x + "px";
+      ball1.style.top = centerY1 + y + "px";
+    },30);
+    // solution1的js实现结束
+
+  </script>
+
+
+</body>
+</html>
