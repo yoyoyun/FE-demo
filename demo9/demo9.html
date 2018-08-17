@@ -1,14 +1,7 @@
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>flex布局</title>
-</head>
-<body>
-    <div class="container">
-        <div class="main"></div>
-        <div class="left"></div>
-        <div class="right"></div>
-    </div>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>flex布局</title>
     <style>
         .container {
             display: flex;
@@ -32,5 +25,35 @@
             background-color: green;
         }
     </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+    <pre>
+        .container {
+            display: flex;
+        }
+        .main {
+            flex-grow: 1;      /*grow默认为0,没有弹性;shrink默认为1,默认会缩小;order默认是0*/
+            height: 300px;
+            background-color: red;
+        }
+        .left {
+            order: -1;
+            flex: 0 1 200px;   /*grow,shrink,basis*/
+            margin-right: 20px;
+            height: 300px;
+            background-color: blue;
+        }
+        .right {
+            flex: 0 1 100px;
+            margin-left: 20px;
+            height: 300px;
+            background-color: green;
+        }
+    </pre>
 </body>
 </html>

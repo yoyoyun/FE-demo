@@ -1,14 +1,7 @@
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>相对定位</title>
-</head>
-<body>
-    <figure>
-        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530858624&di=8d3547cca6ef18928e5b144d330584b3&imgtype=jpg&er=1&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201412%2F09%2F20141209003802_fdTxW.jpeg" width="512" alt="daisy">
-        <figcaption>图片标题</figcaption>
-    </figure>
-    <p>其他文本内容</p>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>相对定位</title>
     <style>
         figure {
             width: 512px;
@@ -25,7 +18,31 @@
             line-height: 2;
             padding: 0 1em;
         }
-
     </style>
+</head>
+<body>
+    <figure>
+        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1530858624&di=8d3547cca6ef18928e5b144d330584b3&imgtype=jpg&er=1&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201412%2F09%2F20141209003802_fdTxW.jpeg" width="512" alt="daisy">
+        <figcaption>图片标题</figcaption>
+    </figure>
+    <p>其他文本内容</p>
+    <h3>代码实现：</h3>
+    <pre>
+        figure {
+            width: 512px;
+        }
+        figure img {
+            display: block;
+        }
+        figcaption {
+            position: relative; /*相对定位*/
+            top: -28px;  /*行高为2倍的fontsize,所以是向上偏移28px*/
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            font-size: 14px;
+            line-height: 2;
+            padding: 0 1em;
+        }
+    </pre>
 </body>
 </html>

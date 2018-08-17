@@ -1,22 +1,7 @@
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>绝对定位</title>
-</head>
-<body>
-    <nav>
-        <a href="#">首页</a>
-        <a href="#">导航1</a>
-        <a href="#">导航2</a>
-    </nav>
-    <main>
-        <section>1</section>
-        <section>2</section>
-        <section>3</section>
-        <section>4</section>
-        <section>5</section>
-    </main>
-    <a href="#" class="go-top">返回顶部</a>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>绝对定位</title>
     <style>
         nav {
             position: fixed;
@@ -68,5 +53,71 @@
             background: #F44336;
         }
     </style>
+</head>
+<body>
+    <nav>
+        <a href="#">首页</a>
+        <a href="#">导航1</a>
+        <a href="#">导航2</a>
+    </nav>
+    <main>
+        <section>1</section>
+        <section>2</section>
+        <section>3</section>
+        <section>4</section>
+        <section>5</section>
+        <pre>
+            nav {
+                position: fixed;
+                line-height: 2;
+                background: rgba(0,0,0,0.3);
+                width: 100%;
+            }
+            nav a {
+                padding: 0 1em;
+                color: rgba(255,255,255,0.7);
+            }
+            nav a:hover {
+                color: #fff;
+            }
+            .go-top {
+                position: fixed;
+                right: 1em;
+                bottom: 1em;
+                color: #fff;
+            }
+            body {
+                margin: 0;
+                font-size: 14px;
+            }
+            a {
+                color: #fff;
+                text-decoration: none;
+            }
+            section {
+                height: 100vh;
+                color: #fff;
+                text-align: center;
+                font-size: 5em;
+                line-height: 100vh;
+            }
+            section:nth-child(1) {
+                background: #62f45d;
+            }
+            section:nth-child(2) {
+                background: #68d0f4;
+            }
+            section:nth-child(3) {
+                background: #f4dd51;
+            }
+            section:nth-child(4) {
+                background: #f441eb;
+            }
+            section:nth-child(5) {
+                background: #F44336;
+            }
+        </pre>
+    </main>
+    <a href="#" class="go-top">返回顶部</a>
 </body>
 </html>
